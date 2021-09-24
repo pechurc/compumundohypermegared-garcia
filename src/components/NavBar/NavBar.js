@@ -2,9 +2,10 @@ import { AppBar, Button, IconButton, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import MenuIcon from '@mui/icons-material/Menu';
 import React from 'react';
+import CartWidget from '../CartWidget/CartWidget';
 
 
-const Navbar = () => {
+const NavBar = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -32,11 +33,11 @@ const Navbar = () => {
                     <Button color="inherit">Ofertas</Button>
                     <Button color="inherit">Liquidacion</Button>
                     <Box sx={{ flexGrow: 1 }} />
-                    <Button color="inherit">Login</Button>
+                    <CartWidget />
                 </Toolbar>
             </AppBar>
         </Box>
     )
 }
 
-export default Navbar;
+export default NavBar;
