@@ -1,10 +1,11 @@
 import './App.css';
+import Navbar from './components/NavBar/NavBar';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Bienvenido a Compumundo Hypermegared</h1>
-    </div>
+    <>
+      <Navbar />
+    </>
   );
 }
 
