@@ -26,9 +26,13 @@ const ItemCount = ({ stock, initial, onAdd }) => {
         setCantidad(cantidad + 1);
     }
 
+    const addToCart = () => {
+        onAdd(cantidad);
+    }
+
     return (
         <Stack direction="row" spacing={1}>
-            <Button onClick={() => removeItem()} variant="outlined">
+            <Button onClick={removeItem} variant="outlined">
                 <RemoveIcon />
             </Button>
 
@@ -36,12 +40,12 @@ const ItemCount = ({ stock, initial, onAdd }) => {
                 {cantidad}
             </Paper>
 
-            <Button onClick={() => addItem()} variant="outlined">
+            <Button onClick={addItem} variant="outlined">
                 <AddIcon />
             </Button>
 
             <Tooltip title="Agregar al carrito">
-                <Button onClick={() => onAdd()} variant="contained">
+                <Button onClick={addToCart} variant="contained">
                     <AddShoppingCartIcon />
                 </Button>
             </Tooltip>
