@@ -1,19 +1,30 @@
 
-import { Container } from '@mui/material';
-import React from 'react';
-import ItemCount from '../item-count/ItemCount';
+import { Container, LinearProgress } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import ItemList from '../item-list/ItemList';
+import itemsMock from './items.mock';
+
 
 const ItemListContainer = () => {
 
-    const onAddToCart = (cantidad) => {
-        console.log("Item agregado, cantidad:" + cantidad);
-    } 
+    const [items, setItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        itemsMock
+            .then((items) => {
+                setItems(items);
+                setLoading(false);
+            });
+    })
 
     return (
-        <Container maxWidth="sm" sx={{p: 2}}>
-            <ItemCount stock={10} initial={0} onAdd={onAddToCart}></ItemCount>
-        </Container>
-
+        <>
+            {loading && <LinearProgress />}
+            <Container>
+                <ItemList items={items} />
+            </Container>
+        </>
     );
 }
 

@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Paper, Stack, Tooltip } from '@mui/material';
+import { Button, Paper, Stack, Tooltip } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -8,7 +8,7 @@ const ItemCount = ({ stock, initial, onAdd }) => {
 
     const [cantidad, setCantidad] = useState(initial);
 
-    const removeItem = () => {
+    const decress = () => {
 
         if (cantidad === 0) {
             return;
@@ -17,7 +17,7 @@ const ItemCount = ({ stock, initial, onAdd }) => {
         setCantidad(cantidad - 1);
     }
 
-    const addItem = () => {
+    const incress = () => {
 
         if (cantidad === stock) {
             return;
@@ -32,7 +32,7 @@ const ItemCount = ({ stock, initial, onAdd }) => {
 
     return (
         <Stack direction="row" spacing={1}>
-            <Button onClick={removeItem} variant="outlined">
+            <Button onClick={decress} variant="outlined">
                 <RemoveIcon />
             </Button>
 
@@ -40,7 +40,7 @@ const ItemCount = ({ stock, initial, onAdd }) => {
                 {cantidad}
             </Paper>
 
-            <Button onClick={addItem} variant="outlined">
+            <Button onClick={incress} variant="outlined">
                 <AddIcon />
             </Button>
 
@@ -51,6 +51,10 @@ const ItemCount = ({ stock, initial, onAdd }) => {
             </Tooltip>
         </Stack>
     )
+}
+
+ItemCount.defaultProps = {
+    initial: 0
 }
 
 export default ItemCount;
