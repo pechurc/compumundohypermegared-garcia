@@ -8,19 +8,19 @@ import itemsMock from './items.mock';
 const ItemListContainer = () => {
 
     const [items, setItems] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         itemsMock
             .then((items) => {
                 setItems(items);
-                setLoading(false);
+                setIsLoading(false);
             });
     })
 
     return (
         <>
-            {loading && <LinearProgress />}
+            {isLoading && <LinearProgress />}
             <Container>
                 <ItemList items={items} />
             </Container>
