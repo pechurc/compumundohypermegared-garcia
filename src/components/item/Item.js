@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material"
+import { Link } from 'react-router-dom';
 
 const Item = ({ item }) => {
 
@@ -21,7 +22,9 @@ const Item = ({ item }) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" sx={{marginLeft: 'auto'}}>Ver detalle</Button>
+                <Link to={`/item/${item.id}`}>
+                    <Button size="small" sx={{ marginLeft: 'auto' }}>Ver detalle</Button>
+                </Link>
             </CardActions>
         </Card>
     );

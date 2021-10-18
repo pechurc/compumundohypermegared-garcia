@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
+import { Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import ItemCount from "../item-count/ItemCount";
 

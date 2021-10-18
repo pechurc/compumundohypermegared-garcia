@@ -5,13 +5,15 @@ import ItemList from '../item-list/ItemList';
 import itemsMock from './items.mock';
 
 
-const ItemListContainer = () => {
+const ItemListContainer = ({ match }) => {
 
+    const categoryId = match.params.id
     const [items, setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        itemsMock
+
+        itemsMock(categoryId)
             .then((items) => {
                 setItems(items);
                 setIsLoading(false);
