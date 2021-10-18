@@ -1,10 +1,15 @@
 import React from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material"
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Item = ({ item }) => {
 
+    const history = useHistory();
     const { title, description, pictureUrl } = item;
+
+    const navigateToItem = () => {
+        history.push(`/item/${item.id}`)
+    }
 
     return (
         <Card>
@@ -22,9 +27,7 @@ const Item = ({ item }) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Link to={`/item/${item.id}`}>
-                    <Button size="small" sx={{ marginLeft: 'auto' }}>Ver detalle</Button>
-                </Link>
+                <Button onClick={navigateToItem} size="small" sx={{ marginLeft: 'auto' }}>Ver detalle</Button>
             </CardActions>
         </Card>
     );

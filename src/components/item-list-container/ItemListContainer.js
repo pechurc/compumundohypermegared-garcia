@@ -13,12 +13,15 @@ const ItemListContainer = ({ match }) => {
 
     useEffect(() => {
 
+        setIsLoading(true);
+        setItems([]);
+        
         itemsMock(categoryId)
             .then((items) => {
                 setItems(items);
                 setIsLoading(false);
             });
-    })
+    }, [categoryId])
 
     return (
         <>

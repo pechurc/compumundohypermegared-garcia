@@ -1,11 +1,23 @@
-import { AppBar, Button, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Button, IconButton, Toolbar } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
 import { Box } from '@mui/system';
 import MenuIcon from '@mui/icons-material/Menu';
 import React from 'react';
 import CartWidget from '../cart-widget/CartWidget';
+import { Link } from 'react-router-dom';
+import brandLogo from './brand.png';
 
+const useStyles = makeStyles((theme) =>
+    createStyles({
+        logo: {
+            maxWidth: 40
+        }
+    })
+);
 
 const NavBar = () => {
+
+    const classes = useStyles();
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -20,18 +32,12 @@ const NavBar = () => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
-                        marginRight="2rem"
-                    >
-                        Compumundo Hypermegared
-                    </Typography>
-                    <Button color="inherit">Nuevos ingresos</Button>
-                    <Button color="inherit">Ofertas</Button>
-                    <Button color="inherit">Liquidacion</Button>
+                    <Link to="/">
+                        <img src={brandLogo} className={classes.logo} />
+                    </Link>
+                    <Button component={Link} to="/category/1" color="inherit">Procesadores</Button>
+                    <Button component={Link} to="/category/2" color="inherit">Fuentes</Button>
+                    <Button component={Link} to="/category/3" color="inherit">Gabinetes</Button>
                     <Box sx={{ flexGrow: 1 }} />
                     <CartWidget />
                 </Toolbar>
