@@ -33,11 +33,11 @@ const NavBar = () => {
                         <MenuIcon />
                     </IconButton>
                     <Link to="/">
-                        <img src={brandLogo} className={classes.logo} />
+                        <img src={brandLogo} alt="Compumundo Hypermegared" className={classes.logo} />
                     </Link>
                     <Button component={Link} to="/category/1" color="inherit">Procesadores</Button>
-                    <Button component={Link} to="/category/2" color="inherit">Fuentes</Button>
-                    <Button component={Link} to="/category/3" color="inherit">Gabinetes</Button>
+                    <Button component={Link} to="/category/2" color="inherit">Gabinetes</Button>
+                    <Button component={Link} to="/category/3" color="inherit">Fuentes</Button>
                     <Box sx={{ flexGrow: 1 }} />
                     <CartWidget />
                 </Toolbar>
