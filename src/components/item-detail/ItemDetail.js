@@ -1,30 +1,23 @@
-import { Alert, Button, Card, CardActions, CardContent, CardMedia, Snackbar, Typography } from "@mui/material";
+import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from 'react-router-dom';
 import ItemCount from "../item-count/ItemCount";
+import { CartContext } from '../../contexts/CartContext';
 
 const ButtonTerminar = () => <Button component={Link} to="/cart" variant="contained" color="primary">Terminar compra</Button>;
 
 const ItemDetail = ({ item }) => {
 
   const { pictureUrl, price, title, description, stock } = item;
-  const [cantidad, setCantidad] = useState();
-  const [open, setOpen] = useState(false);
+  const [itemInCart, setItemInCart] = useState(false);
+  const [addItem] = useContext(CartContext);
 
   const onAddToCart = (cantidad) => {
-    setCantidad(cantidad);
-    setOpen(true);
-    console.log(`se agregaron ${cantidad} al carrito`);
+
+    addItem(item, cantidad);
+    setItemInCart(true);
   }
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
 
   return (
     <>
@@ -42,7 +35,7 @@ const ItemDetail = ({ item }) => {
             </Typography>
           </CardContent>
           <CardActions sx={{ display: 'flex', alignContent: 'space-between' }}>
-            {isNaN(cantidad)
+            {!itemInCart
               ? <>
                 <ItemCount initial={0} stock={stock} onAdd={onAddToCart}></ItemCount>
                 <Typography variant="body2" color="text.secondary" sx={{ marginLeft: 1 }}>
@@ -60,12 +53,6 @@ const ItemDetail = ({ item }) => {
           alt="green iguana"
         />
       </Card>
-      
-      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-          Se agrego {cantidad} producto/s al carrito
-        </Alert>
-      </Snackbar>
     </>
   );
 }
