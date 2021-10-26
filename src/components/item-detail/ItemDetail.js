@@ -11,7 +11,7 @@ const ItemDetail = ({ item }) => {
 
   const { pictureUrl, price, title, description, stock } = item;
   const [itemInCart, setItemInCart] = useState(false);
-  const [addItem] = useContext(CartContext);
+  const { addItem } = useContext(CartContext);
 
   const onAddToCart = (cantidad) => {
 

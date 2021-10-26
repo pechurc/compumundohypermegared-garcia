@@ -72,7 +72,7 @@ export const CartProvider = ({ children }) => {
     };
 
     return (
-        <CartContext.Provider value={[addItem, removeItem, clear, isInCart, items]}>
+        <CartContext.Provider value={{ addItem, removeItem, clear, isInCart, items }}>
             {children}
 
             <Snackbar open={snackbar.open} autoHideDuration={3000} onClose={handleClose}>

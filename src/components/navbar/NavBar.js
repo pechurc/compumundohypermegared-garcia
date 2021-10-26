@@ -2,10 +2,11 @@ import { AppBar, Button, IconButton, Toolbar } from '@mui/material';
 import { makeStyles, createStyles } from '@mui/styles';
 import { Box } from '@mui/system';
 import MenuIcon from '@mui/icons-material/Menu';
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import CartWidget from '../cart-widget/CartWidget';
 import { Link } from 'react-router-dom';
 import brandLogo from './brand.png';
+import { CartContext } from '../../contexts/CartContext';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) =>
 const NavBar = () => {
 
     const classes = useStyles();
-
+    
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
