@@ -2,11 +2,10 @@ import { AppBar, Button, IconButton, Toolbar } from '@mui/material';
 import { makeStyles, createStyles } from '@mui/styles';
 import { Box } from '@mui/system';
 import MenuIcon from '@mui/icons-material/Menu';
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import CartWidget from '../cart-widget/CartWidget';
 import { Link } from 'react-router-dom';
 import brandLogo from './brand.png';
-import { CartContext } from '../../contexts/CartContext';
 
 const useStyles = makeStyles((theme) =>
     createStyles({

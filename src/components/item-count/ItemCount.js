@@ -10,7 +10,7 @@ const ItemCount = ({ stock, initial, onAdd }) => {
 
     const decress = () => {
 
-        if (cantidad === 0) {
+        if (cantidad === 1) {
             return;
         }
 
@@ -54,7 +54,7 @@ const ItemCount = ({ stock, initial, onAdd }) => {
 }
 
 ItemCount.defaultProps = {
-    initial: 0
+    initial: 1
 }
 
 export default ItemCount;

@@ -7,6 +7,19 @@ import { CartContext } from '../../contexts/CartContext';
 
 const ButtonTerminar = () => <Button component={Link} to="/cart" variant="contained" color="primary">Terminar compra</Button>;
 
+const ItemCartActions = ({ itemInCart, onAdd, stock }) => {
+  return (
+    !itemInCart
+      ? <>
+        <ItemCount stock={stock} onAdd={onAdd}></ItemCount>
+        <Typography variant="body2" color="text.secondary" sx={{ marginLeft: 1 }}>
+          ({stock} disponibles)
+        </Typography>
+      </>
+      : <ButtonTerminar />
+  );
+}
+
 const ItemDetail = ({ item }) => {
 
   const { pictureUrl, price, title, description, stock } = item;
@@ -35,15 +48,7 @@ const ItemDetail = ({ item }) => {
             </Typography>
           </CardContent>
           <CardActions sx={{ display: 'flex', alignContent: 'space-between' }}>
-            {!itemInCart
-              ? <>
-                <ItemCount initial={0} stock={stock} onAdd={onAddToCart}></ItemCount>
-                <Typography variant="body2" color="text.secondary" sx={{ marginLeft: 1 }}>
-                  ({stock} disponibles)
-                </Typography>
-              </>
-              : <ButtonTerminar />
-            }
+            <ItemCartActions itemInCart={itemInCart} onAdd={onAddToCart} stock={stock} />
           </CardActions>
         </Box>
         <CardMedia
