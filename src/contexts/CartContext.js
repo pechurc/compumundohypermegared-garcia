@@ -1,5 +1,5 @@
 import { Alert, Snackbar } from "@mui/material";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext();
 
@@ -11,6 +11,12 @@ export const CartProvider = ({ children }) => {
         open: false
     });
     const [items, setItems] = useState([]);
+    const [itemsCount, setItemsCount] = useState(0);
+
+    useEffect(() => {
+        setItemsCount(items
+            .reduce((acc, item) => acc + item.cantidad, 0));
+    }, [items])
 
     const addItem = (item, cantidad) => {
 
@@ -56,7 +62,7 @@ export const CartProvider = ({ children }) => {
     }
 
     const isInCart = (itemId) => {
-        return !!items.find(item => item.id === itemId);
+        return items.some(item => item.id === itemId);
     }
 
     const handleClose = (event, reason) => {
@@ -72,7 +78,7 @@ export const CartProvider = ({ children }) => {
     };
 
     return (
-        <CartContext.Provider value={{ addItem, removeItem, clear, isInCart, items }}>
+        <CartContext.Provider value={{ addItem, removeItem, clear, isInCart, items, itemsCount }}>
             {children}
 
             <Snackbar open={snackbar.open} autoHideDuration={3000} onClose={handleClose}>
