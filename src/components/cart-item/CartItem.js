@@ -1,7 +1,11 @@
 import { Avatar, Divider, Grid, IconButton, ListItem, ListItemAvatar, Typography } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useFirebaseImage } from '../../hooks/useFirebaseImage';
 
 const CartItem = ({ item, onDelete }) => {
+
+    const { pictureUrl, price, title, cantidad } = item;
+    const picture =  useFirebaseImage(pictureUrl);
 
     return (
         <>
@@ -13,20 +17,20 @@ const CartItem = ({ item, onDelete }) => {
                 }
             >
                 <ListItemAvatar>
-                    <Avatar alt={item.title} src={item.pictureUrl} variant="square" sx={{ width: 70, height: 70 }} />
+                    <Avatar alt={title} src={picture} variant="square" sx={{ width: 70, height: 70 }} />
                 </ListItemAvatar>
                 <Grid container alignItems="center">
                     <Grid item xs>
                         <Typography gutterBottom variant="h6" component="div">
-                            {item.title}
+                            {title}
                         </Typography>
                     </Grid>
                     <Grid item>
                         <Typography gutterBottom variant="h6" component="div">
-                            ${item.price * item.cantidad}
+                            ${price * cantidad}
                         </Typography>
                         <Typography color="text.secondary" variant="body2">
-                            {item.cantidad} Unidad{item.cantidad > 1 && 'es'}
+                            {cantidad} Unidad{cantidad > 1 && 'es'}
                         </Typography>
                     </Grid>
                 </Grid>

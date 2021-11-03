@@ -27,7 +27,7 @@ const Cart = () => {
 
                         <Typography variant="h4">Carrito</Typography>
                         <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-                            {items?.map(item => <CartItem item={item} onDelete={removeItem}></CartItem>)}
+                            {items?.map(item => <CartItem item={item} onDelete={removeItem} key={item.id}></CartItem>)}
                         </List>
                         <Divider />
                         <Grid container alignItems="center">

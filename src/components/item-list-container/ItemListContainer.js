@@ -1,9 +1,9 @@
 
+import { collection, getDocs, query, where } from '@firebase/firestore';
 import { Container, LinearProgress } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { db } from '../../firebase/firebase';
 import ItemList from '../item-list/ItemList';
-import itemsMock from './items.mock';
-
 
 const ItemListContainer = ({ match }) => {
 
@@ -15,12 +15,24 @@ const ItemListContainer = ({ match }) => {
 
         setIsLoading(true);
         setItems([]);
-        
-        itemsMock(categoryId)
-            .then((items) => {
-                setItems(items);
-                setIsLoading(false);
-            });
+
+        const requestData = async () => {
+
+            const queryConstraints = [];
+            if (categoryId !== undefined) {
+                queryConstraints.push(where('categoryId', '==', categoryId));
+            }
+
+            const q = query(collection(db, 'items'), ...queryConstraints);
+            const itemsSnapshot = await getDocs(q);
+            const itemsList = itemsSnapshot.docs
+                .map((document) => ({ ...document.data(), id: document.id }));
+
+            setItems(itemsList);
+            setIsLoading(false);
+        }
+        requestData();
+
     }, [categoryId])
 
     return (

@@ -4,6 +4,7 @@ import { useState, useContext } from "react";
 import { Link } from 'react-router-dom';
 import ItemCount from "../item-count/ItemCount";
 import { CartContext } from '../../contexts/CartContext';
+import { useFirebaseImage } from "../../hooks/useFirebaseImage";
 
 const ButtonTerminar = () => <Button component={Link} to="/cart" variant="contained" color="primary">Terminar compra</Button>;
 
@@ -23,6 +24,7 @@ const ItemCartActions = ({ itemInCart, onAdd, stock }) => {
 const ItemDetail = ({ item }) => {
 
   const { pictureUrl, price, title, description, stock } = item;
+  const picture =  useFirebaseImage(pictureUrl);
   const [itemInCart, setItemInCart] = useState(false);
   const { addItem } = useContext(CartContext);
 
@@ -54,8 +56,8 @@ const ItemDetail = ({ item }) => {
         <CardMedia
           component="img"
           sx={{ width: 151, margin: 'auto' }}
-          image={pictureUrl}
-          alt="green iguana"
+          image={picture}
+          alt={title}
         />
       </Card>
     </>

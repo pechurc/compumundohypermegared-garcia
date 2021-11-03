@@ -1,11 +1,13 @@
 import React from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material"
 import { useHistory } from 'react-router-dom';
+import { useFirebaseImage } from '../../hooks/useFirebaseImage';
 
 const Item = ({ item }) => {
 
     const history = useHistory();
     const { title, description, pictureUrl } = item;
+    const picture =  useFirebaseImage(pictureUrl);
 
     const navigateToItem = () => {
         history.push(`/item/${item.id}`)
@@ -15,7 +17,7 @@ const Item = ({ item }) => {
         <Card>
             <CardMedia
                 component="img"
-                image={pictureUrl}
+                image={picture}
                 alt={title}
             />
             <CardContent>

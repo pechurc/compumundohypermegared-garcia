@@ -1,22 +1,32 @@
+import { doc, getDoc } from '@firebase/firestore';
 import { Container, LinearProgress } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { db } from '../../firebase/firebase';
 import ItemDetail from '../item-detail/ItemDetail';
-import itemMock from './item.mock';
 
 const ItemDetailContainer = ({ match }) => {
 
-    const id = match.params.id;
+    const itemId = match.params.id;
     const [item, setItem] = useState();
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        
+        const requestData = async () => {
+            const docRef = doc(db, 'items', itemId);
+            const docSnap = await getDoc(docRef);
 
-        itemMock(id)
-            .then(item => {
-                setItem(item);
+            if (docSnap.exists()) {
+                const item = docSnap.data();
+                const id = docSnap.id;
+
+                setItem({...item, id});
                 setIsLoading(false);
-            });
-    })
+            }
+        } 
+        requestData();
+
+    }, [itemId])
 
     return (
         <>
